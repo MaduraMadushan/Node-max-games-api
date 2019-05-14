@@ -13,4 +13,13 @@ router.post('/', auth, async (req, res) => {
     }
 })
 
+router.get('/', auth, async (req, res) => {
+    try{
+        const genres = await Genre.find({})
+        res.send(genres)
+    }catch(e){
+        res.status(500).send()
+    }
+})
+
 module.exports = router
