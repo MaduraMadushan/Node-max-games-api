@@ -43,4 +43,8 @@ router.post('/logoutAll', auth, async (req, res) => {
     }
 })
 
+router.get('/me', auth, async (req, res) => {
+    res.send(req.user)
+})
+
 module.exports = router
