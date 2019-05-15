@@ -45,4 +45,23 @@ router.get('/:id', auth, async (req, res) => {
     }
 })
 
+router.patch('/:id', auth, async (req, res) => {
+    const _id = req.params.id
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['name', 'description', 'genre', 'platform', 'price']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if(!isValidOperation) return res.status(400).send({error: 'Invalid updates!'})
+
+    try{
+        const game = await Game.findById(_id)
+        if(!game) return res.status(404).send()
+        updates.forEach((update) => game[update] = req.body[update])
+        await game.save()
+        res.send(game)
+    }catch(e){
+        res.status(400).send(e)
+    }
+})
+
 module.exports = router
