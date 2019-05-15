@@ -33,4 +33,16 @@ router.get('/:id', auth, async (req, res) => {
     }
 })
 
+router.patch('/:id', auth, async (req, res) => {
+    const _id = req.params.id
+    try{
+        const genre = await Genre.findByIdAndUpdate(_id,{name: req.body.name}, {new: true})
+        if(!genre) return res.status(404).send()
+        await genre.save()
+        res.send(genre)
+    } catch(e){
+        res.status(400).send(e)
+    }
+})
+
 module.exports = router
