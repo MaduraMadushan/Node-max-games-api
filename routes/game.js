@@ -13,4 +13,14 @@ router.post('/', auth, async (req, res) => {
     }
 })
 
+router.get('/', auth, async (req, res) => {
+    try{
+        const games = await Game.find({})
+                                .populate('genre')
+        res.send(games)                        
+    } catch (e){
+        res.status(500).send()
+    }
+})
+
 module.exports = router
