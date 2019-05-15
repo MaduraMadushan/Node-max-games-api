@@ -45,4 +45,15 @@ router.patch('/:id', auth, async (req, res) => {
     }
 })
 
+router.delete('/:id', auth, async (req, res) => {
+    const _id = req.params.id
+    try{
+        const genre = await Genre.findByIdAndDelete(_id)
+        if(!genre) return res.status(404).send()
+        res.send(genre)
+    }catch (e){
+        res.status(500).send()
+    }
+})
+
 module.exports = router
