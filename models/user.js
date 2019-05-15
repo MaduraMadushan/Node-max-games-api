@@ -37,7 +37,7 @@ const userSchema = mongosse.Schema({
             type: String
         }
     }]
-},{timestamps: true})
+})
 
 userSchema.methods.toJSON = function(){
     const user = this
