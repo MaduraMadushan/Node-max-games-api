@@ -25,10 +25,12 @@ const gameSchema = mongooose.Schema({
         required: true,
     },
     image:{
-        type: Buffer
+        type: String,
+        required: true
     },
-    coverimage:{
-        type: Buffer
+    imagecover:{
+        type: String,
+        required: true
     }
 },{timestamps: true})
 
