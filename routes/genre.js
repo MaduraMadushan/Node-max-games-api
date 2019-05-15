@@ -13,7 +13,7 @@ router.post('/', auth, async (req, res) => {
     }
 })
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try{
         const genres = await Genre.find({})
         res.send(genres)
@@ -22,7 +22,7 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     const _id = req.params.id
     try{
         const genre = await Genre.findById(_id)

@@ -15,7 +15,7 @@ router.post('/', auth, async (req, res) => {
     }
 })
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     const sort = {}
     let limit = req.query.limit ? parseInt(req.query.limit) : 100
     let skip = req.query.skip? parseInt(req.query.skip) : 0
@@ -36,7 +36,7 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     const _id = req.params.id
     try{
         const game = await Game.findById(_id).populate('genre')
