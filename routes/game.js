@@ -34,4 +34,15 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
+router.get('/:id', auth, async (req, res) => {
+    const _id = req.params.id
+    try{
+        const game = await Game.findById(_id).populate('genre')
+        if(!game) return res.status(404).send()
+        res.send(game)
+    }catch(e){
+        res.status(500).send()
+    }
+})
+
 module.exports = router
