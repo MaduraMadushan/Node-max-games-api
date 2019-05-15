@@ -14,9 +14,20 @@ router.post('/', auth, async (req, res) => {
 })
 
 router.get('/', auth, async (req, res) => {
+    const sort = {}
+    let limit = req.query.limit ? parseInt(req.query.limit) : 100
+    let skip = req.query.skip? parseInt(req.query.skip) : 0
+    if(req.query.sortBy){
+        const parts = req.query.sortBy.split(':')
+        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
+    }
     try{
         const games = await Game.find({})
                                 .populate('genre')
+                                .sort(sort)
+                                .limit(limit)
+                                .skip(skip)
+                                .exec()
         res.send(games)                        
     } catch (e){
         res.status(500).send()
