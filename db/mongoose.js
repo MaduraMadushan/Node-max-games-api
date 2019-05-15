@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const keys = require('./../config/keys')
 
-mongoose.connect('mongodb://127.0.0.1:27017/max-games', {
+mongoose.connect(keys.MONGODB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
